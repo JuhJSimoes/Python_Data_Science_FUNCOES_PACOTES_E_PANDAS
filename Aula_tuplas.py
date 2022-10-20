@@ -38,23 +38,3 @@ for carro, valor in zip(carros, valores):
     if(valor > 100000):
         print(carro, '\n')
         
-
-dados = {'Jetta Variant': 88078.64, 'Passat': 106161.94, 'Crossfox': 72832.16}
-print(dados, '\n')
-
-
-dados = dict(zip(carros, valores))
-print(dados, '\n')
-
-dados = {'Jetta Variant': 88078.64, 'Passat': 106161.94, 'Crossfox': 72832.16}
-print(dados['Passat'])
-
-print('Passat' in dados)
-print('Corsa' in dados)
-print(len(dados), '\n')
-
-dados['DS5'] = 124921.71
-print(dados)
-
-del dados['Passat']
-print(dados)
