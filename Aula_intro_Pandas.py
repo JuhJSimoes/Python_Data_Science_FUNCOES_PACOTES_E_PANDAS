@@ -1,6 +1,9 @@
 import sys
 import pandas as pd
 #https://pandas.pydata.org/pandas-docs/version/0.25/
+#https://pandas.pydata.org/pandas-docs/stable/
+#https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html
+
 
 #pd.set_option('display.max_rows', 100)
 #pd.set_option('display.max_rows', 3)
@@ -56,7 +59,43 @@ print(dataset.loc[:, ['Motor', 'Valor']], '\n')
 print(dataset.iloc[[1]]) #iloc seleciona baseado em numerico
 print(dataset.iloc[1:4])
 print(dataset.iloc[1:4, [0, 5, 2]])
-print(dataset.iloc[[1,42,22] , [0, 5, 2]])
+print(dataset.iloc[[1,42,22] , [0, 5, 2]], '\n')
+
+print('\n')
+
+#Queries com DataFrames
+
+dataset.head()
+print(dataset.Motor)
+select = dataset.Motor == 'Motor Diesel'
+print(dataset[select])
+print(dataset[(dataset.Motor == 'Motor Diesel') & (dataset.Zero_km == True)], '\n')
+print(dataset.query('Motor == "Motor Diesel" and Zero_km == True'))
 
 
+for item in dataset:
+    print(item)
+    
+for index, row in dataset.iterrows():
+    if(2019 - row['Ano'] != 0):
+        dataset.loc[index, 'Km_media'] = row['Quilometragem']/(2019 - row['Ano'])
+    else:
+        dataset.loc[index, 'Km_media'] = 0
+        
+print(dataset, '\n')
+
+print(dataset.Quilometragem.isna())
+
+print(dataset[dataset.Quilometragem.isna()])
+
+dataset.fillna(0, inplace=True) #sem o inplace=True a alteração é apenas visual, necessario esse parametro para salvar no dataset.
+print(dataset)
+
+print(dataset.query('Zero_km == True'))
+print('\n')
+
+dataset = pd.read_csv('../Python_Data_Science_FUNCOES_PACOTES_E_PANDAS/Pandas/data/db.csv', sep=';')
+
+dataset.dropna(subset=['Quilometragem'], inplace=True)
+print(dataset)
 
